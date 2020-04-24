@@ -1,0 +1,26 @@
+.card {
+  padding: 3rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 1);
+  background-color: indigo;
+}
+.card input{
+  width: 100%;
+  height: 20px;
+  margin: 5px;
+  border-radius: 5px;
+}
+.card button{
+border-radius: 4px;
+size: 15%;
+background-color: in;
+cursor: pointer;
+font-size: 22px;
+height: 25%;
+width: 35%;
+
+
+}
+.card button:hover{
+  color: #6cdb6c;
+}

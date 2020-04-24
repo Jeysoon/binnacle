@@ -1,0 +1,35 @@
+.NavigationItem {
+    margin: 0;
+    height: 100%;
+    width: auto;
+}
+.NavigationItem li{
+    text-decoration: none;
+    padding: 20px;
+    margin: 0;
+    display: inline-block;
+    vertical-align: middle;
+    text-align: right;
+    
+}
+.NavigationItem a {
+    color: white;
+    text-decoration: none;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: rgb(223, 24, 213);
+    padding:0;
+    position: relative;
+    top: 29%;
+    right: -50px;
+    padding: 8px;
+    border-radius: 7px;
+}
+
+.NavigationItem a:hover,
+.NavigationItem a:active,
+.NavigationItem a.active {
+    background-color:#f35dec;
+    border: 2px solid white;
+    box-shadow: 0 5px 4px 3px rgba(0, 0, 0, 0.39);
+}

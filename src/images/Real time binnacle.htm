@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<!-- saved from url=(0026)http://localhost:3000/auth -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <link rel="icon" href="http://localhost:3000/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#000000">
+    <meta name="description" content="Web site created using create-react-app">
+    <link rel="apple-touch-icon" href="http://localhost:3000/logo192.png">
+    <!--
+      manifest.json provides metadata used when your web app is installed on a
+      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
+    -->
+    <link rel="manifest" href="http://localhost:3000/manifest.json">
+    <!--
+      Notice the use of  in the tags above.
+      It will be replaced with the URL of the `public` folder during the build.
+      Only files inside the `public` folder can be referenced from the HTML.
+
+      Unlike "/favicon.ico" or "favicon.ico", "/favicon.ico" will
+      work correctly both with client-side routing and a non-root public URL.
+      Learn how to configure a non-root public URL by running `npm run build`.
+    -->
+    <title>Real time binnacle</title>
+  <style type="text/css">* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}</style><style type="text/css">.Button {
+    background-color: transparent;
+    border: none;
+    color: white;
+    outline: none;
+    cursor: pointer;
+    font: inherit;
+    padding: 10px;
+    margin: 10px;
+    font-weight: bold;
+}
+
+.Button:first-of-type {
+    margin-left: 0;
+    padding-left: 0;
+}
+
+.Button:disabled {
+    color: #ccc;
+    cursor: not-allowed;
+}
+
+.Success {
+    color: #5C9210;
+}
+
+.Danger {
+    color: #944317;
+}</style><style type="text/css">.Input {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.Label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.InputElement {
+    outline: none;
+    border: 1px solid #ccc;
+    background-color: white;
+    font: inherit;
+    padding: 6px 10px;
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.InputElement:focus {
+    outline: none;
+    background-color: #ccc;
+}
+
+.Invalid {
+    border: 1px solid red;
+    background-color: #FDA49A;
+}</style><style type="text/css">.lds-ring {
+  display: inline-block;
+  position: relative;
+  width: 54px;
+  height: 54px;
+}
+.lds-ring div {
+  box-sizing: border-box;
+  display: block;
+  position: absolute;
+  width: 44px;
+  height: 44px;
+  margin: 6px;
+  border: 6px solid #ff2058;
+  border-radius: 50%;
+  animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  border-color: #ff2058 transparent transparent transparent;
+}
+.lds-ring div:nth-child(1) {
+  animation-delay: -0.45s;
+}
+.lds-ring div:nth-child(2) {
+  animation-delay: -0.3s;
+}
+.lds-ring div:nth-child(3) {
+  animation-delay: -0.15s;
+}
+@keyframes lds-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+</style><style type="text/css">.card {
+  padding: 3rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 1);
+  background-color: indigo;
+}
+.card input{
+  width: 100%;
+  height: 20px;
+  margin: 5px;
+  border-radius: 5px;
+}
+.card button{
+border-radius: 4px;
+size: 15%;
+background-color: in;
+cursor: pointer;
+font-size: 22px;
+height: 25%;
+width: 35%;
+
+
+}
+.card button:hover{
+  color: #6cdb6c;
+}</style><style type="text/css">.auth {
+    position: absolute;
+    top: 13%;
+    left: 14%;
+    width: 30rem;
+    margin: 2rem auto;
+    max-width: 80%;
+    text-align: center;
+  }
+  </style><style type="text/css">.Content {
+    margin-top: 55px;
+    /* min-height: 100vh;
+    font-size: calc(10px + 2vmin);
+    color: white;
+    background: url("../../images/heavy-duty_.jpg");
+    width: 100%;
+    height: 100%; */
+    background: url(/static/media/heavy-duty.cafa392e.jpg);
+    
+}
+
+.Reasons{
+    width: 80%;
+    margin: auto;
+    text-align: center;
+}
+
+
+</style><style type="text/css">.Toolbar {
+    height: 56px;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #585858 ;
+    display: flex;
+    padding: 0 20px;
+    box-sizing: border-box;
+    z-index: 90;
+}
+
+.Toolbar nav {
+    height: 100%;
+}
+
+.Logo {
+    height: 80%;
+}
+.main-nav{
+    display: inline-block;
+    text-align: right;
+    width: calc(100% - 74px);
+    vertical-align: middle;
+}
+/* @media (max-width: 499px) {
+    .DesktopOnly {
+        display: none;
+        display: inline-block;
+        text-align: right;
+    }
+} */</style><style type="text/css">.NavigationItems {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    height: 100%;
+}
+
+@media (min-width: 500px) {
+    .NavigationItems {
+        flex-flow: row;
+    }
+}</style><style type="text/css">.NavigationItem {
+    margin: 0;
+    height: 100%;
+    width: auto;
+}
+.NavigationItem li{
+    text-decoration: none;
+    padding: 20px;
+    margin: 0;
+    display: inline-block;
+    vertical-align: middle;
+    text-align: right;
+    
+}
+.NavigationItem a {
+    color: white;
+    text-decoration: none;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: rgb(223, 24, 213);
+    padding:0;
+    position: relative;
+    top: 29%;
+    right: -50px;
+    padding: 8px;
+    border-radius: 7px;
+}
+
+.NavigationItem a:hover,
+.NavigationItem a:active,
+.NavigationItem a.active {
+    background-color:#f35dec;
+    border: 2px solid white;
+    box-shadow: 0 5px 4px 3px rgba(0, 0, 0, 0.39);
+}
+</style><style type="text/css">.DrawerToggle {
+    width: 40px;
+    height: 100%;
+    display: flex;
+    flex-flow: column;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px 0;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+.DrawerToggle div {
+    width: 90%;
+    height: 3px;
+    background-color: white;
+}
+
+@media (min-width: 500px) {
+    .DrawerToggle {
+        display: none;
+    }
+}</style><style type="text/css">.SideDrawer {
+    position: fixed;
+    width: 280px;
+    max-width: 70%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    z-index: 200;
+    background-color: white;
+    padding: 32px 16px;
+    box-sizing: border-box;
+    transition: transform 0.3s ease-out;
+}
+
+@media (min-width: 500px) {
+    .SideDrawer {
+        display: none;
+    }
+}
+
+.Open {
+    transform: translateX(0);
+}
+
+.Close {
+    transform: translateX(-100%);
+}
+
+.Logo {
+    height: 11%;
+    margin-bottom: 32px;
+}</style><style type="text/css">.Backdrop {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    z-index: 100;
+    left: 0;
+    top: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+}</style><style type="text/css">
+.main-section{
+    width: 100%;
+    margin: auto;
+    height: 400px;
+    overflow: scroll;
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.2rem;
+    text-align: start;
+}
+.background__div{
+    text-align: center;
+    color: white;
+    font-size: 30px;
+    position: relative;
+    top: 25%;
+}
+
+
+
+.second-section{
+    width: 80%;
+    align-items: center;
+    margin: auto;
+    height: 250px;
+    overflow: scroll;
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.2rem;
+    text-align: start;
+    /* position: inherit; */
+}
+
+.second-section__article {
+    /* position: relative;
+    top: 45px; */
+    background: #d5ffdc;
+    text-align: center;
+    padding: 16px;
+    margin: 10px;
+    width: 30%;
+    display: inline-block;
+    vertical-align: middle;
+} 
+
+.background{
+    background: url(/static/media/heavy-duty.cafa392e.jpg);
+    height: 100%;
+    width: 100%;
+}
+
+.third-section {
+    width: 80%;
+    margin: auto;
+    height: 374px;
+    /* overflow: scroll; */
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.2rem;
+    text-align: start;
+}
+.third-section_colors{
+    height: 200px;
+    margin: 2px solid black;
+}
+
+.third-section__blue {
+    display:  block;
+    background: #2388c2;
+    margin: 2px solid black;
+    height: 33%;
+}
+.third-section__purple {
+    background: purple;
+    height: 33%;
+    margin: 2px solid black;
+    
+}
+.third-section__yellow {
+    background: #ecec05;
+    height: 33%;
+    margin: 2px solid black;
+    
+}
+.footer{
+    height: 100px;
+    width: 100%;
+    background-color: black;
+    color: white;
+}
+.footer div {
+
+    text-align: center;
+}
+.main-footer__links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+.main-footer__link {
+    display: inline-block;
+    margin: 0 16px;
+    margin-top: 2%;
+}
+
+.main-footer__link a {
+    color: white;
+    text-decoration: none;
+}
+</style></head>
+  <body>
+    <div id="root"><header class="Toolbar"><div class="DrawerToggle"><div></div><div></div><div></div></div><nav class="main-nav"><ul class="NavigationItems"><li class="NavigationItem"><a aria-current="page" class="active" href="http://localhost:3000/auth">Authenticate</a></li></ul></nav></header><div class="SideDrawer Close"><nav><ul class="NavigationItems"><li class="NavigationItem"><a aria-current="page" class="active" href="http://localhost:3000/auth">Authenticate</a></li></ul></nav></div><main class="Content"><div class="auth"><div class="card"><form><div><label></label><input class="" type="email" placeholder="Provide a valid email-address" value=""></div><div><label></label><input class="" type="Password" placeholder="Password" value=""></div><p>Sign up to coninue</p><button class=" ">Sign up</button></form></div></div></main></div>
+  <script src="./Real time binnacle_files/bundle.js"></script><script src="./Real time binnacle_files/0.chunk.js"></script><script src="./Real time binnacle_files/main.chunk.js"></script><script src="./Real time binnacle_files/main.0a67c8c3dd3bf65add57.hot-update.js"></script>
+
+</body></html>

@@ -1,0 +1,115 @@
+
+.main-section{
+    width: 100%;
+    margin: auto;
+    height: 400px;
+    overflow: scroll;
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.2rem;
+    text-align: start;
+}
+.background__div{
+    text-align: center;
+    color: white;
+    font-size: 30px;
+    position: relative;
+    top: 25%;
+}
+
+
+
+.second-section{
+    width: 80%;
+    align-items: center;
+    margin: auto;
+    height: 250px;
+    overflow: scroll;
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.2rem;
+    text-align: start;
+    /* position: inherit; */
+}
+
+.second-section__article {
+    /* position: relative;
+    top: 45px; */
+    background: #d5ffdc;
+    text-align: center;
+    padding: 16px;
+    margin: 10px;
+    width: 30%;
+    display: inline-block;
+    vertical-align: middle;
+} 
+
+.background{
+    background: url('../../images//heavy-duty.jpg');
+    height: 100%;
+    width: 100%;
+}
+
+.third-section {
+    width: 80%;
+    margin: auto;
+    height: 374px;
+    /* overflow: scroll; */
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.2rem;
+    text-align: start;
+}
+.third-section_colors{
+    height: 200px;
+    margin: 2px solid black;
+}
+
+.third-section__blue {
+    display:  block;
+    background: #2388c2;
+    margin: 2px solid black;
+    height: 33%;
+}
+.third-section__purple {
+    background: purple;
+    height: 33%;
+    margin: 2px solid black;
+    
+}
+.third-section__yellow {
+    background: #ecec05;
+    height: 33%;
+    margin: 2px solid black;
+    
+}
+.footer{
+    height: 100px;
+    width: 100%;
+    background-color: black;
+    color: white;
+}
+.main-footer div {
+
+    text-align: center;
+}
+.footer__links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+.footer__link {
+    display: inline-block;
+    margin: 0 16px;
+    margin-top: 2%;
+}
+
+.footer__link a {
+    color: white;
+    text-decoration: none;
+}
+.footer article {
+    text-align: center;
+}
