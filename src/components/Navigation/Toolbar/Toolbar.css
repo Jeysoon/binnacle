@@ -24,10 +24,3 @@
     width: calc(100% - 74px);
     vertical-align: middle;
 }
-/* @media (max-width: 499px) {
-    .DesktopOnly {
-        display: none;
-        display: inline-block;
-        text-align: right;
-    }
-} */

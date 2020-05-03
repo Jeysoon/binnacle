@@ -1,6 +1,6 @@
-import React from 'react';
+import React from "react";
 
-import './Spinner.css';
+import "./Spinner.css";
 
 const LoadingIndicator = () => (
   <div className="lds-ring">

@@ -17,19 +17,16 @@
     text-decoration: none;
     width: 100%;
     box-sizing: border-box;
-    background-color: rgb(223, 24, 213);
+    background-color: #777677;
     padding:0;
     position: relative;
     top: 29%;
     right: -50px;
-    padding: 8px;
+    padding: 10px;
     border-radius: 7px;
 }
 
 .NavigationItem a:hover,
-.NavigationItem a:active,
-.NavigationItem a.active {
-    background-color:#f35dec;
-    border: 2px solid white;
-    box-shadow: 0 5px 4px 3px rgba(0, 0, 0, 0.39);
+.NavigationItem a:active{
+    background-color: #6c6c6d;
 }

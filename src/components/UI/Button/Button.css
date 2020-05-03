@@ -9,6 +9,16 @@
     margin: 10px;
     font-weight: bold;
 }
+.submit{
+    width: 60%;
+    height: 40%;
+    padding: 5px;
+    margin-top: 10px;
+    border: 2px solid black;
+    color: white;
+    font-size: 25px;
+    background-color: transparent;   
+  }
 
 .Button:first-of-type {
     margin-left: 0;
