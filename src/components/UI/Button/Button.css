@@ -9,6 +9,10 @@
     margin: 10px;
     font-weight: bold;
 }
+.Button:hover{
+    color: #fa923f,
+}
+
 .submit{
     width: 60%;
     height: 40%;

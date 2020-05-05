@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { AuthContext } from "../../context/auth-context";
-import classes from "./ProjectCreator";
+// import classes from "./ProjectCreator.css";
 const ProjectCreator = props => {
   const context = useContext(AuthContext);
 
@@ -8,11 +8,9 @@ const ProjectCreator = props => {
     <div>
       <header>UserName</header>
       <div>
-        <p className={classes.content}>Project Creator</p>
-        {context.isAuth ? (
-          <p className={classes.content}>isAuth true </p>
-        ) : (
-          <p className={classes.content}> isAuth false</p>
+        <p className="content">Project Creator</p>
+        {context.isAuth && (
+          <p className="content">isAuth:  {context.isAuth} </p>
         )}
       </div>
     </div>

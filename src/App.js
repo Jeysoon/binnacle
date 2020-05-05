@@ -1,12 +1,13 @@
 import React, { useContext, Suspense } from "react";
 import Auth from "./containers/Auth/Auth";
-import { AuthContext } from "./context/auth-context";
-import { Route, BrowserRouter, Switch, Redirect } from "react-router-dom";
+import {AuthContext}  from "./context/auth-context";
+import { Route, Switch, Redirect, BrowserRouter } from "react-router-dom";
 import ProjectCreator from "./containers/ProjectCreator/ProjectCreator";
 import Layout from "./hoc/Layout/Layout";
 import Welcome from "./containers/Welcome/Welcome";
 
 function App() {
+
   let routes = (
     <Switch>
       <Route path="/auth" render={props => <Auth {...props} />} />
@@ -17,6 +18,7 @@ function App() {
 
   const authContext = useContext(AuthContext);
 
+    console.log('authContext:',authContext.isAuth);
   if (authContext.isAuth) {
     routes = (
       <Switch>
@@ -28,10 +30,15 @@ function App() {
   }
   return (
     <BrowserRouter>
-      <Layout>
-        <Suspense fallback={<p>Loading...</p>}>{routes}</Suspense>
-      </Layout>
+    <Layout>
+          <Suspense fallback={<p>Loading...</p>}>{routes}</Suspense>
+        </Layout>
     </BrowserRouter>
+
+          
+        
+      
+
   );
 }
 

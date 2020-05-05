@@ -3,7 +3,7 @@
     height: 100%;
     width: auto;
 }
-.NavigationItem li{
+/* .NavigationItem li{
     text-decoration: none;
     padding: 20px;
     margin: 0;
@@ -11,7 +11,7 @@
     vertical-align: middle;
     text-align: right;
     
-}
+} */
 .NavigationItem a {
     color: white;
     text-decoration: none;
@@ -26,7 +26,15 @@
     border-radius: 7px;
 }
 
+
 .NavigationItem a:hover,
 .NavigationItem a:active{
     background-color: #6c6c6d;
+}
+@media (max-width: 500px){
+    .NavigationItem a  {
+        position: relative;
+        top: 29%;
+        right: 0px;
+    }
 }

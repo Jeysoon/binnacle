@@ -1,18 +1,33 @@
 .auth {
-    position: absolute;
+    position: relative;
     top: 13%;
-    left: 14%;
     width: 30rem;
-    margin: 2rem auto;
+    margin: auto;
     max-width: 80%;
     text-align: center;
   }
+  
 
   .sign-form{
-    margin-bottom: 8px;
+    position: relative;
+    top: 20%;
   }
+  .sign-form div{
+    padding: 5px;
+  }
+.switchSignMethodHandler{
+  position: relative;
+  top: 6%;
+  text-align: center;
+}
+.switchSignMethodHandler li {
+  list-style: none;
+  margin: 4px;
+}
+
+
   .submit{
-    width: 60%;
+    width: 45%;
     height: 40%;
     padding: 5px;
     margin-top: 10px;
@@ -21,4 +36,7 @@
     font-size: 25px;
     background-color: transparent;   
   }
-  
+  .div-wraper{
+    position: relative;
+    top: 144px;
+  }

@@ -14,10 +14,11 @@ const input = props => {
     case "input":
       inputElement = (
         <input
-          className={inputClasses.join(" ")}
-          {...props.elementConfig}
-          value={props.value}
-          onChange={props.changed}
+          // className={inputClasses.join(" ")}
+           {...props.elementConfig}
+           value={props.value}
+           onChange={props.changed}
+          className="input"
         />
       );
       break;

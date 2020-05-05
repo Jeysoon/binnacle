@@ -1,10 +1,15 @@
 .Content {
-    height: 1400px;
+    position: relative;
     margin-top: 55px;
-    background: url('../../images/heavy-duty.jpg');
-    
+    /* background: url('../../images/heavy-duty.jpg'); */
+    background-color: gray;
+    height: 1000px;
 }
-
+@media (max-width: 500px){
+    .Content{
+        height: 800px;
+    }
+}
 .Reasons{
     width: 80%;
     margin: auto;

@@ -6,9 +6,7 @@ import SideDrawer from "../../components/Navigation/SideDrawer/SideDrawer/SideDr
 import { AuthContext } from "../../context/auth-context";
 
 const Layout = props => {
-  // state = {
-  //     showSideDrawer: false
-  // }
+  
 
   const authContext = useContext(AuthContext);
 

@@ -16,7 +16,17 @@
     position: relative;
     top: 25%;
 }
-
+.second-section__article-container{
+    position: relative;
+    top: 28%;
+    display: flex;
+    flex-flow: row;
+}
+@media (min-width: 500px) {
+    .second-section__article-container {
+        
+    }
+}
 
 
 .second-section{
@@ -44,6 +54,7 @@
     vertical-align: middle;
 } 
 
+
 .background{
     background: url('../../images//heavy-duty.jpg');
     height: 100%;
@@ -63,6 +74,8 @@
 .third-section_colors{
     height: 200px;
     margin: 2px solid black;
+    position: relative;
+    top: 20%;
 }
 
 .third-section__blue {
@@ -113,3 +126,4 @@
 .footer article {
     text-align: center;
 }
+

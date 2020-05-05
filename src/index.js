@@ -4,15 +4,12 @@ import "./index.css";
 import App from "./App";
 import AuthContextProvider from "./context/auth-context";
 import * as serviceWorker from "./serviceWorker";
-import { BrowserRouter } from "react-router-dom";
 
 //I could manage the main state from here.
 
 const app = (
-  <AuthContextProvider>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <AuthContextProvider>
+        <App />
   </AuthContextProvider>
 );
 

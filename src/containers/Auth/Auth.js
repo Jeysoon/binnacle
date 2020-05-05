@@ -2,20 +2,18 @@ import React, {
   useState,
   useContext,
   useReducer,
-  useCallback,
-  useEffect
 } from "react";
 import Button from "../../components/UI/Button/Button";
 import Input from "../../components/UI/Input/Input";
 import Spinner from "../../components/UI/Spinner/Spinner";
 import { AuthContext } from "../../context/auth-context";
 import { updateObject, checkValidity } from "../../shared/utility";
-// import ProjectCreator from '../ProjectCreator/ProjectCreator';
-import { Redirect } from "react-router-dom";
+import { Redirect, NavLink } from "react-router-dom";
 import "./Auth.css";
 import axios from "axios";
 
-const Auth = props => {
+
+const Auth = () => {
   const authContext = useContext(AuthContext);
 
   const [authForm, setAuthForm] = useState({
@@ -23,7 +21,7 @@ const Auth = props => {
       elementType: "input",
       elementConfig: {
         type: "email",
-        placeholder: "Provide a valid email-address"
+        placeholder: "Provide a valid email"
       },
       value: "",
       validation: {
@@ -49,11 +47,7 @@ const Auth = props => {
     }
   });
 
-  // const [isSignUp , setisSignUp ] = useState(true);
-
-  // useEffect(()=>{
-
-  // });
+ 
 
   const httpReducer = (curHttpState, action) => {
     switch (action.type) {
@@ -82,7 +76,8 @@ const Auth = props => {
     token: false
   });
 
-  const [trigger, setTrigger] = useState(false);
+  const [ signMethod, setSignMethod ] = useState(false);
+
 
   if (httpState.token) {
     console.log("Calling login function from authContext");
@@ -90,7 +85,6 @@ const Auth = props => {
   }
   if (httpState.shouldSend) {
     console.log("calling sendRequest");
-    //sendRequest();
   }
 
   const sendRequest = () => {
@@ -101,9 +95,15 @@ const Auth = props => {
     };
 
     console.log("FormData:", formData);
+    let url = null;
+    url =
+   "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyBTXd7qMGoCoK0PrRCzONLylk8MNSTJuqE";
+    
+    if(signMethod){
+      console.log('Inside SignMethod if');
+       url = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyBTXd7qMGoCoK0PrRCzONLylk8MNSTJuqE';
+    }
 
-    let url =
-      "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyAWzqVWEi_uOtqui50Sr5L0x52cR-1wJhw";
     dispatchHttp({ type: "SEND" });
     axios
       .post(url, formData)
@@ -137,13 +137,9 @@ const Auth = props => {
   const submitHandler = event => {
     console.log("subnmitHandler");
     event.preventDefault();
-    //setTrigger(!trigger);
     sendRequest();
   };
-  if (trigger) {
-    console.log("sendRequest call");
-    sendRequest();
-  }
+
 
   const formElementsArray = [];
   for (let key in authForm) {
@@ -174,22 +170,33 @@ const Auth = props => {
     redirect = <Redirect to="/project-creator" />;
   }
 
+const signInClicked = () => {
+  setSignMethod(true);
+};
+const signUpClicked = () => {
+  setSignMethod(false);
+};
+
+
   return (
+    <>
+    <div className="switchSignMethodHandler">
+    <li>
+      <Button clicked={signUpClicked}> Sign Up</Button>
+      <Button clicked={signInClicked} > Sign In</Button>
+      <NavLink activeStyle={{color: '#fa923f',textDecoration: 'none'}} to="/"> Navlinkson </NavLink>
+    </li>
+  </div>
     <div className="div-wraper">
       <div className="auth">
         {redirect}
         <form className="sign-form" onSubmit={submitHandler}>
           {form}
-          <p>Sign up to coninue</p>
-          {redirect}
-          {/* <input type="submit" value="Sign up"></input> */}
-          <button className="submit"></button>
+  <button className="submit">{!signMethod ? 'Sign Up' : 'Sign In' }</button>
         </form>
-        <div>
-          <Button></Button>
-        </div>
       </div>
     </div>
+    </>
   );
 };
 

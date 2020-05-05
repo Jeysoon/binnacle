@@ -10,7 +10,7 @@ const welcome = props => {
         </div>
       </section>
       <section className="second-section">
-        <div>
+        <div className="second-section__article-container">
           <article className="second-section__article">
             <p>Article 1</p>
           </article>
