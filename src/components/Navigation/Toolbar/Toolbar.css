@@ -18,7 +18,7 @@
 .Logo {
     height: 80%;
 }
-.main-nav{
+.main__nav{
     display: inline-block;
     text-align: right;
     /* width: calc(100% - 74px); */
@@ -27,7 +27,7 @@
 }
 
 
-.main-nav a{
+.main__nav a{
     margin: 8px;
 }
 

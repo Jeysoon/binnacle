@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 
-import "./Layout.css";
+import classes from"./Layout.css";
 import Toolbar from "../../components/Navigation/Toolbar/Toolbar";
 import SideDrawer from "../../components/Navigation/SideDrawer/SideDrawer/SideDrawer";
 import { AuthContext } from "../../context/auth-context";
@@ -35,18 +35,18 @@ const Layout = props => {
         open={sideDrawerIsVisible}
         closed={sideDrawerClosedHandler}
       />
-      <main className="Content">{props.children}</main>
-      <footer className="footer">
+      <main className={classes.Content}>{props.children}</main>
+      <footer className={classes.footer}>
         <nav>
-          <ul className="footer__links">
-            <li className="footer__link">
+          <ul className={classes.footer__links}>
+            <li className={classes.footer__link}>
               <a href="/support">Support</a>
             </li>
-            <li className="footer__link">
+            <li className={classes.footer__link}>
               <a href="/terms">Terms of Use</a>
             </li>
           </ul>
-          <article className="main-footer">Jeyson Meza 2020</article>
+          <article className={classes.main__footer}>Jeyson Meza 2020</article>
         </nav>
       </footer>
     </>

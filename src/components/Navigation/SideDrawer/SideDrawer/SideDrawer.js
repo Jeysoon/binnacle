@@ -1,13 +1,13 @@
 import React from "react";
 import NavigationItems from "../../NavigationItems/NavigationItems";
-import "./SideDrawer.css";
+import  classes from "./SideDrawer.css";
 import Backdrop from "../../../UI/Backdrop/Backdrop";
 
 const sideDrawer = props => {
-  let attachedClasses = ["SideDrawer", "Close"];
+  let attachedClasses = [classes.SideDrawer, classes.Close];
   const { isAuth } = props;
   if (props.open) {
-    attachedClasses = ["SideDrawer", "Open"];
+    attachedClasses = [classes.SideDrawer, classes.Open];
   }
   return (
     <>

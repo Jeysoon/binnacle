@@ -6,19 +6,43 @@
     max-width: 80%;
     text-align: center;
   }
-  
+  .Button {
+    background-color: transparent;
+    border: none;
+    color: white;
+    outline: none;
+    cursor: pointer;
+    font: inherit;
+    padding: 10px;
+    margin: 10px;
+    font-weight: bold;
+  }
 
-  .sign-form{
+  .ButtonActive{
+    background-color: transparent;
+    border: none;
+    color: #e7640c;
+    outline: none;
+    cursor: pointer;
+    font: inherit;
+    padding: 10px;
+    margin: 10px;
+    font-weight: bold
+  }
+
+  .sign__form{
     position: relative;
     top: 20%;
   }
-  .sign-form div{
+  .sign__form div{
     padding: 5px;
   }
 .switchSignMethodHandler{
-  position: relative;
-  top: 6%;
   text-align: center;
+  position: relative;
+  top: 25px;
+  bottom: 40px;
+  margin: 35px;
 }
 .switchSignMethodHandler li {
   list-style: none;

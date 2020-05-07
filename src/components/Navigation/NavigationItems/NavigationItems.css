@@ -4,6 +4,10 @@
     list-style: none;
     height: 100%;
 }
+.NavigationItems li {
+    height: 100%;
+    width: 100%;
+}
 
 @media (min-width: 500px) {
     .NavigationItems {

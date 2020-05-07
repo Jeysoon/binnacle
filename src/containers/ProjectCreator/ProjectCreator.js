@@ -1,19 +1,13 @@
 import React, { useContext } from "react";
 import { AuthContext } from "../../context/auth-context";
-// import classes from "./ProjectCreator.css";
+import classes from "./ProjectCreator.css";
 const ProjectCreator = props => {
   const context = useContext(AuthContext);
-
+  console.log('Project Creator' ,context.isAuth);
   return (
-    <div>
-      <header>UserName</header>
       <div>
-        <p className="content">Project Creator</p>
-        {context.isAuth && (
-          <p className="content">isAuth:  {context.isAuth} </p>
-        )}
+        <p className={classes.Content}>Project Creator</p>
       </div>
-    </div>
   );
 };
 

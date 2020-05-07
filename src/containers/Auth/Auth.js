@@ -8,8 +8,8 @@ import Input from "../../components/UI/Input/Input";
 import Spinner from "../../components/UI/Spinner/Spinner";
 import { AuthContext } from "../../context/auth-context";
 import { updateObject, checkValidity } from "../../shared/utility";
-import { Redirect, NavLink } from "react-router-dom";
-import "./Auth.css";
+import { Redirect } from "react-router-dom";
+import classes from "./Auth.css";
 import axios from "axios";
 
 
@@ -177,22 +177,27 @@ const signUpClicked = () => {
   setSignMethod(false);
 };
 
+// let 
+
+// if(signMethod){
+
+// }
+
 
   return (
     <>
-    <div className="switchSignMethodHandler">
+    <div className={classes.switchSignMethodHandler}>
     <li>
-      <Button clicked={signUpClicked}> Sign Up</Button>
-      <Button clicked={signInClicked} > Sign In</Button>
-      <NavLink activeStyle={{color: '#fa923f',textDecoration: 'none'}} to="/"> Navlinkson </NavLink>
+      <Button class={!signMethod ? classes.ButtonActive : classes.Button} signMethod={signMethod} clicked={signUpClicked}> Sign Up</Button>
+      <Button class={signMethod ? classes.ButtonActive : classes.Button} signMethod={signMethod} clicked={signInClicked} > Sign In</Button>
     </li>
   </div>
-    <div className="div-wraper">
-      <div className="auth">
+    <div className={classes.div__wraper}>
+      <div className={classes.auth}>
         {redirect}
-        <form className="sign-form" onSubmit={submitHandler}>
+        <form className={classes.sign__form} onSubmit={submitHandler}>
           {form}
-  <button className="submit">{!signMethod ? 'Sign Up' : 'Sign In' }</button>
+  <button className={classes.submit} > {!signMethod ? 'Sign Up' : 'Sign In' }</button>
         </form>
       </div>
     </div>

@@ -1,6 +1,6 @@
 .Content {
     position: relative;
-    margin-top: 55px;
+    margin-top: 35px;
     /* background: url('../../images/heavy-duty.jpg'); */
     background-color: gray;
     height: 1000px;
@@ -23,7 +23,7 @@
     background-color: black;
     color: white;
 }
-.main-footer div {
+.main__footer div {
 
     text-align: center;
 }
