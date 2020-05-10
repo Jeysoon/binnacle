@@ -3,6 +3,8 @@
     width: 280px;
     max-width: 70%;
     height: 100%;
+    display: flex;
+    flex-flow: column;
     left: 0;
     top: 0;
     z-index: 200;

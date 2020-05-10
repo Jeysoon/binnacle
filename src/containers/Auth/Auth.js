@@ -1,8 +1,4 @@
-import React, {
-  useState,
-  useContext,
-  useReducer,
-} from "react";
+import React, { useState, useContext, useReducer, useEffect } from "react";
 import Button from "../../components/UI/Button/Button";
 import Input from "../../components/UI/Input/Input";
 import Spinner from "../../components/UI/Spinner/Spinner";
@@ -11,7 +7,6 @@ import { updateObject, checkValidity } from "../../shared/utility";
 import { Redirect } from "react-router-dom";
 import classes from "./Auth.css";
 import axios from "axios";
-
 
 const Auth = () => {
   const authContext = useContext(AuthContext);
@@ -47,8 +42,6 @@ const Auth = () => {
     }
   });
 
- 
-
   const httpReducer = (curHttpState, action) => {
     switch (action.type) {
       case "SEND":
@@ -76,16 +69,13 @@ const Auth = () => {
     token: false
   });
 
-  const [ signMethod, setSignMethod ] = useState(false);
+  const [signMethod, setSignMethod] = useState(false);
 
-
-  if (httpState.token) {
-    console.log("Calling login function from authContext");
+useEffect(()=>{
+  if(httpState.token){
     authContext.login();
   }
-  if (httpState.shouldSend) {
-    console.log("calling sendRequest");
-  }
+},[httpState.token, authContext]);
 
   const sendRequest = () => {
     const formData = {
@@ -93,15 +83,13 @@ const Auth = () => {
       password: authForm.password.value,
       returnSecuretoken: true
     };
-
-    console.log("FormData:", formData);
     let url = null;
     url =
-   "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyBTXd7qMGoCoK0PrRCzONLylk8MNSTJuqE";
-    
-    if(signMethod){
-      console.log('Inside SignMethod if');
-       url = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyBTXd7qMGoCoK0PrRCzONLylk8MNSTJuqE';
+      "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyBTXd7qMGoCoK0PrRCzONLylk8MNSTJuqE";
+
+    if (signMethod) {
+      url =
+        "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyBTXd7qMGoCoK0PrRCzONLylk8MNSTJuqE";
     }
 
     dispatchHttp({ type: "SEND" });
@@ -111,12 +99,9 @@ const Auth = () => {
         dispatchHttp({ type: "RESPONSE" });
         //dispatchHttp({token: response.data.idToken});
         httpState.token = response.data.idToken;
-        console.log("Response Data:", response.data.idToken);
-
-        // return response.json();
+        return response.json();
       })
       .catch(err => {
-        console.log(err.message);
       });
   };
 
@@ -135,11 +120,9 @@ const Auth = () => {
   };
 
   const submitHandler = event => {
-    console.log("subnmitHandler");
     event.preventDefault();
-    sendRequest();
+      sendRequest();
   };
-
 
   const formElementsArray = [];
   for (let key in authForm) {
@@ -160,47 +143,54 @@ const Auth = () => {
       changed={event => inputChangedHandler(event, formElement.id)}
     />
   ));
-  if (httpState.loading) {
-    form = <Spinner />;
-  }
 
   let redirect = null;
 
   if (httpState.token) {
-    redirect = <Redirect to="/project-creator" />;
+    redirect = <Redirect to="/project-manager" />;
   }
 
-const signInClicked = () => {
-  setSignMethod(true);
-};
-const signUpClicked = () => {
-  setSignMethod(false);
-};
-
-// let 
-
-// if(signMethod){
-
-// }
-
+  const signInClicked = () => {
+    setSignMethod(true);
+  };
+  const signUpClicked = () => {
+    setSignMethod(false);
+  };
 
   return (
     <>
-    <div className={classes.switchSignMethodHandler}>
-    <li>
-      <Button class={!signMethod ? classes.ButtonActive : classes.Button} signMethod={signMethod} clicked={signUpClicked}> Sign Up</Button>
-      <Button class={signMethod ? classes.ButtonActive : classes.Button} signMethod={signMethod} clicked={signInClicked} > Sign In</Button>
-    </li>
-  </div>
-    <div className={classes.div__wraper}>
-      <div className={classes.auth}>
-        {redirect}
-        <form className={classes.sign__form} onSubmit={submitHandler}>
-          {form}
-  <button className={classes.submit} > {!signMethod ? 'Sign Up' : 'Sign In' }</button>
-        </form>
+      <div className={classes.switchSignMethodHandler}>
+        <li>
+          <Button
+            class={!signMethod ? classes.ButtonActive : classes.Button}
+            signMethod={signMethod}
+            clicked={signUpClicked}
+          >
+            {" "}
+            Sign Up
+          </Button>
+          <Button
+            class={signMethod ? classes.ButtonActive : classes.Button}
+            signMethod={signMethod}
+            clicked={signInClicked}
+          >
+            {" "}
+            Sign In
+          </Button>
+        </li>
       </div>
-    </div>
+      <div className={classes.div__wraper}>
+        <div className={classes.auth}>
+          {redirect}
+          <form className={classes.sign__form} onSubmit={submitHandler}>
+            {!httpState.loading ? form : <Spinner />}
+            <button className={classes.submit}>
+              {" "}
+              {!signMethod ? "Sign Up" : "Sign In"}
+            </button>
+          </form>
+        </div>
+      </div>
     </>
   );
 };

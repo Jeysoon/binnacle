@@ -1,13 +1,11 @@
 import React, { useState, useContext } from "react";
 
-import classes from"./Layout.css";
+import classes from "./Layout.css";
 import Toolbar from "../../components/Navigation/Toolbar/Toolbar";
 import SideDrawer from "../../components/Navigation/SideDrawer/SideDrawer/SideDrawer";
 import { AuthContext } from "../../context/auth-context";
 
 const Layout = props => {
-  
-
   const authContext = useContext(AuthContext);
 
   const [sideDrawerIsVisible, setSideDrawerIsVisible] = useState(false);

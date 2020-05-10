@@ -1,45 +1,50 @@
 import React, { useContext, Suspense } from "react";
-import Auth from "./containers/Auth/Auth";
-import {AuthContext}  from "./context/auth-context";
-import { Route, Switch, Redirect, BrowserRouter } from "react-router-dom";
-import ProjectCreator from "./containers/ProjectCreator/ProjectCreator";
+import { AuthContext } from "./context/auth-context";
+import { Route, Switch, Redirect, withRouter } from "react-router-dom";
 import Layout from "./hoc/Layout/Layout";
-import Welcome from "./containers/Welcome/Welcome";
+
+
+const Auth = React.lazy(() => {
+  return import('./containers/Auth/Auth');
+});
+
+const ProjectManager = React.lazy(()=>{
+  return import('./containers/ProjectManager/ProjectManager');
+});
+
+const Welcome = React.lazy(()=>{
+  return import('./containers/Welcome/Welcome');
+});
 
 function App() {
-
-  let routes = (
-    <Switch>
-      <Route path="/auth" render={props => <Auth {...props} />} />
-      <Route path="/" exact component={Welcome} />
-      <Route path="/" component={Layout} />
-    </Switch>
-  );
-
+  
   const authContext = useContext(AuthContext);
-
-    console.log('authContext:',authContext.isAuth);
-  if (authContext.isAuth) {
-    routes = (
+    let routes = (
       <Switch>
-        <Route path="/project-creator" component={ProjectCreator} />
         <Route path="/" exact component={Welcome} />
+        <Route path="/auth" render={props => <Auth {...props} />} />
         <Redirect to="/" />
       </Switch>
     );
-  }
+    if (authContext.isAuth) {
+      routes = (
+        <Switch>
+          <Route path="/project-manager" component={ProjectManager} />
+          <Route path="/" exact component={Welcome} />
+          <Redirect to="/" />
+        </Switch>
+      );
+      }
+  
+ 
+  
   return (
-    <BrowserRouter>
-    <Layout>
-          <Suspense fallback={<p>Loading...</p>}>{routes}</Suspense>
-        </Layout>
-    </BrowserRouter>
-
-          
-        
-      
-
+      <Layout>
+        <Suspense fallback={<p>Loading...</p>}>
+          {routes}
+        </Suspense>
+      </Layout>
   );
 }
 
-export default App;
+export default withRouter(App);
