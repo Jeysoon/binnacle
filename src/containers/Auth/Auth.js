@@ -71,11 +71,11 @@ const Auth = () => {
 
   const [signMethod, setSignMethod] = useState(false);
 
-useEffect(()=>{
-  if(httpState.token){
-    authContext.login();
-  }
-},[httpState.token, authContext]);
+  useEffect(() => {
+    if (httpState.token) {
+      authContext.login();
+    }
+  }, [httpState.token, authContext]);
 
   const sendRequest = () => {
     const formData = {
@@ -101,8 +101,7 @@ useEffect(()=>{
         httpState.token = response.data.idToken;
         return response.json();
       })
-      .catch(err => {
-      });
+      .catch(err => {});
   };
 
   const inputChangedHandler = (event, controlName) => {
@@ -121,7 +120,7 @@ useEffect(()=>{
 
   const submitHandler = event => {
     event.preventDefault();
-      sendRequest();
+    sendRequest();
   };
 
   const formElementsArray = [];

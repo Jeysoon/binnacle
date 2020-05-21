@@ -1,15 +1,15 @@
 
 .Content{
     display: flex;
-    flex-flow: initial;
+    flex-flow: row;
     text-align: center;
+    align-items: center;
     color: black;
-    font-size: 20px;
+    height: 9%;
     position: relative;
     left: 0px;
     box-sizing: border-box;
-    border: 4px solid #0a0a0a;
-    height: 80px;
+    border-bottom: 4px solid #0a0a0a;
     overflow: hidden;
 }
 .header{
@@ -20,10 +20,9 @@ border: 2px solid black;
 .ProjectWraper{
    display: flex;
    flex-flow: column;
-   border-right: 1px solid rgb(0, 0, 0, 0.5);
+   border-right: 2px solid #545257ed;
    height: 100%;
    width: 40%;
-   position: sticky;
    top: 0;
    background-color: white;
 }
@@ -35,21 +34,50 @@ border: 2px solid black;
     }
 }
 .Projects{
-    color: rgb(114, 111, 112);
-    text-align: initial;
+    color: rgb(47, 43, 43);
     position: relative;
     top: 24%;
     left: 10px;
     width: 40%;
 }
+.ProjectCreator{
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    position: relative;
+    display: flex;
+    flex-flow: row;
+}
+.ProjectFormContainer{
+    margin: 20px;
+    padding: 5px;
+    background: rgb(66, 64, 66);
+    position: relative;
+    top: 20px;
+    width: 100%;
+    border: 4px solid black;    
+}
 .Button{
     margin: 3px;
     background-color: #3d7703;
-    position: relative;
-    top: 5%;
     height: 38px;
-    width: 60%;
+    color: white;
+    position: relative;
+    left: 5%;
+    top: 10%;
+    width: 50%;
     border-radius: 8px;
+    cursor: pointer;
+}
+.ProjectsSection{
+    width: 100%;
+    height: 100%;
+}
+
+.ProjectsContainer{
+    position: relative;
+    width: 90%;
+    height: 80%;
 }
 @media (max-width: 500px){
 .Button{
