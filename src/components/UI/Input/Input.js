@@ -47,6 +47,17 @@ const input = props => {
         </select>
       );
       break;
+    case "amount":
+      inputElement = (
+        <input
+          className={inputClasses.join(" ")}
+          type={props.elementType}
+          id="amount"
+          value={props.value}
+          onChange={props.changed}
+        />
+      );
+      break;
     default:
       inputElement = (
         <input
