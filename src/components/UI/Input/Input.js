@@ -17,7 +17,7 @@ const input = props => {
           className={inputClasses.join(" ")}
           {...props.elementConfig}
           value={props.value}
-          onChange={props.changed}
+          onChange={event => props.changed(event)}
           // className="input"
         />
       );
@@ -28,7 +28,7 @@ const input = props => {
           className={inputClasses.join(" ")}
           {...props.elementConfig}
           value={props.value}
-          onChange={props.changed}
+          onChange={event => props.changed(event)}
         />
       );
       break;
@@ -37,7 +37,7 @@ const input = props => {
         <select
           className={inputClasses.join(" ")}
           value={props.value}
-          onChange={props.changed}
+          onChange={event => props.changed(event)}
         >
           {props.elementConfig.options.map(option => (
             <option key={option.value} value={option.value}>
@@ -54,7 +54,7 @@ const input = props => {
           type={props.elementType}
           id="amount"
           value={props.value}
-          onChange={props.changed}
+          onChange={event => props.changed(event)}
         />
       );
       break;
@@ -64,7 +64,7 @@ const input = props => {
           className={inputClasses.join(" ")}
           {...props.elementConfig}
           value={props.value}
-          onChange={props.changed}
+          onChange={event => props.changed(event)}
         />
       );
   }

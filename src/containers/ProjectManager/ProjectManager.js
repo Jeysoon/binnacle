@@ -1,25 +1,25 @@
 import React, { useReducer, useState, useCallback } from "react";
 // import { AuthContext } from "../../context/auth-context";
-import Button from "../../components/UI/Button/Button";
+// import Button from "../../components/UI/Button/Button";
 import classes from "./ProjectManager.css";
 import Input from "../../components/UI/Input/Input";
-import Card from "../../components/UI/Card/Card";
-import LoadingIndicator from "../../components/UI/LoadingIndicator/LoadingIndicator";
+// import Card from "../../components/UI/Card/Card";
+// import LoadingIndicator from "../../components/UI/LoadingIndicator/LoadingIndicator";
 import ItemForm from "./ItemForm/ItemForm";
 import { updateObject, checkValidity } from "../../shared/utility";
 
-const itemReducer = (currenItems, action) => {
-  switch (action.type) {
-    case "SET":
-      return action.items;
-    case "ADD":
-      return [...currenItems, action.item];
-    case "DELETE":
-      return currenItems.filter(itm => itm.id !== action.id);
-    default:
-      throw new Error("Should reach here");
-  }
-};
+// const itemReducer = (currenItems, action) => {
+//   switch (action.type) {
+//     case "SET":
+//       return action.items;
+//     case "ADD":
+//       return [...currenItems, action.item];
+//     case "DELETE":
+//       return currenItems.filter(itm => itm.id !== action.id);
+//     default:
+//       throw new Error("Should reach here");
+//   }
+// };
 
 const httpReducer = (curHttpState, action) => {
   switch (action.type) {
@@ -39,9 +39,9 @@ const httpReducer = (curHttpState, action) => {
 const ProjectManager = props => {
   // const context = useContext(AuthContext);
 
-  const [items, dispatch] = useReducer(itemReducer, []);
+  // const [items, dispatch] = useReducer(itemReducer, []);
 
-  const [projectData, setProjectData] = useState("");
+  // const [ projectData, setProjectData ] = useState('');
   const [httpState, dispatchHttp] = useReducer(httpReducer, {
     loading: false,
     error: null
@@ -49,12 +49,14 @@ const ProjectManager = props => {
 
   const [showProjectForm, setShowProjectForm] = useState(false);
 
-  const [projectForm, setProjectForm] = useState({
+  const [projectName, setProjectName] = useState("");
+
+  const [form, setForm] = useState({
     name: {
       elementType: "input",
       elementConfig: {
         type: "text",
-        placeholder: "Name of the project"
+        placeholder: "Projects Name "
       },
       value: "",
       validation: {
@@ -67,64 +69,76 @@ const ProjectManager = props => {
 
   const [isProjectCreated, setIsProjectCreated] = useState(false);
 
-  const [enteredTitle, setEnteredTitle] = useState("");
+  // const [formIsValid, setFormIsValid] = useState(false);
 
-  const [formIsValid, setFormIsValid] = useState(false);
+  const projectSubmitHandler = useCallback(
+    event => {
+      event.preventDefault();
+      const formData = {};
+      for (let formElemenIdentifier in form) {
+        formData[formElemenIdentifier] = form[formElemenIdentifier].value;
+      }
+      console.log("formData", formData);
 
-  const projectFormSubmitHandler = useCallback(event => {
-    event.preventDefault();
-    // const formData = {};
-    // for (let formElemenIdentifier in projectForm) {
-    //   formData[formElemenIdentifier] = projectForm[formElemenIdentifier].value;
-    //}
-    setProjectData({ ...projectForm });
-    setIsProjectCreated(!isProjectCreated);
-    console.log("projectData: ", projectData);
-    fetch("https://binnacle-faafc.firebaseio.com/items.json", {
-      method: "POST",
-      body: JSON.stringify(projectForm),
-      headers: { "Content-Type": "application/json" }
-    })
-      .then(response => {
-        return response.json();
+      const preparedData = {
+        ...form
+      };
+
+      fetch("https://binnacle-faafc.firebaseio.com/items.json", {
+        method: "POST",
+        body: JSON.stringify(preparedData),
+        headers: { "Content-Type": "application/json" }
       })
-      .catch(err => {
-        console.log(err.errorMessage);
-      });
-  }, []);
+        .then(response => {
+          dispatchHttp({ type: "RESPONSE" });
+          return response.json();
+        })
+        .catch(err => {
+          console.log(err.errorMessage);
+        });
+      setIsProjectCreated(!isProjectCreated);
+    },
+    [form, isProjectCreated]
+  );
 
   const inputChangedHandler = (event, inputIdentifier) => {
-    const updatedFormElement = updateObject(projectForm[inputIdentifier], {
+    event.preventDefault();
+    const updatedFormElement = updateObject(form[inputIdentifier], {
       value: event.target.value,
       valid: checkValidity(
         event.target.value,
-        projectForm[inputIdentifier].validation
+        form[inputIdentifier].validation
       ),
       touched: true
     });
+    // const deepCloneForm = {
+    //   ...form
+    // };
 
-    const updatedProjectForm = updateObject(projectForm, {
+    const updatedOrderForm = updateObject(form, {
       [inputIdentifier]: updatedFormElement
     });
-    let formIsValid = true;
-    for (let inputIdentifier in updatedProjectForm) {
-      formIsValid = updatedProjectForm[inputIdentifier].valid && formIsValid;
-    }
-    setProjectForm(updatedProjectForm);
-    setFormIsValid(formIsValid);
-  };
 
+    let formIsValid = true;
+    for (let inputIdentifier in updatedOrderForm) {
+      formIsValid = updatedOrderForm[inputIdentifier].valid && formIsValid;
+    }
+    setProjectName(event.target.value);
+    setForm(updatedOrderForm);
+    console.log("form first call: ", updatedOrderForm);
+    // setFormIsValid(formIsValid);
+  };
   const formElementsArray = [];
-  for (let key in projectForm) {
+  for (let key in form) {
     formElementsArray.push({
       id: key,
-      config: projectForm[key]
+      config: form[key]
     });
   }
 
-  let form = (
+  let initialData = (
     <div>
-      <form onSubmit={projectFormSubmitHandler}>
+      <form onSubmit={projectSubmitHandler}>
         {formElementsArray.map(formElement => (
           <Input
             key={formElement.id}
@@ -135,48 +149,44 @@ const ProjectManager = props => {
             shoudlValidate={formElement.config.validation}
             touched={formElement.config.touched}
             changed={event => inputChangedHandler(event, formElement.id)}
+            // changed={event=>(event.target.value)}
           />
         ))}
-        {/* <button type="submit" className={classes.CreateProjectButton}>Create Project</button> */}
-        <Button type="submit" class={classes.CreateProjectButton}>
-          Create Project
-        </Button>
+        <button>Add Project Name</button>
       </form>
     </div>
   );
-
-  // const submitProjectContent = event => {
-  //   event.preventDefault();
-  // };
 
   const showProjectFormHandler = event => {
     event.preventDefault();
     setShowProjectForm(!showProjectForm);
   };
 
-  const addItemHandler = useCallback(item => {
-    dispatchHttp({ type: "SEND" });
-    console.log("item.projectName: ", item.projectName);
-    fetch("https://binnacle-faafc.firebaseio.com/items.json", {
-      method: "POST",
-      body: JSON.stringify(item),
-      headers: { "Content-Type": "application/json" }
-    })
-      .then(response => {
-        dispatchHttp({ type: "RESPONSE" });
-        console.log("Response: ", response);
-        return response.json();
+  const addItemHandler = useCallback(
+    item => {
+      dispatchHttp({ type: "SEND" });
+
+      const data = {
+        ...item,
+        nombreProyecto: projectName
+      };
+
+      fetch("https://binnacle-faafc.firebaseio.com/items.json", {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: { "Content-Type": "application/json" }
       })
-      .then(responseData => {
-        dispatch({
-          type: "ADD",
-          item: { id: responseData.name, ...item }
+        .then(response => {
+          dispatchHttp({ type: "RESPONSE" });
+          console.log("Response: ", response);
+          return response.json();
+        })
+        .catch(err => {
+          console.log(err.errorMessage);
         });
-      })
-      .catch(err => {
-        console.log(err.errorMessage);
-      });
-  }, []);
+    },
+    [projectName]
+  );
 
   return (
     <div className={classes.ProjectCreator}>
@@ -193,13 +203,13 @@ const ProjectManager = props => {
       </div>
       <div className={classes.ProjectFormContainer}>
         {isProjectCreated ? (
-          <h1 className={classes.projectTitle}>{projectForm.name.value}</h1>
+          <h1 className={classes.projectTitle}>{form.name.value}</h1>
         ) : (
           <h1 className={classes.Greet}>
             Provide data and life to your project!
           </h1>
         )}
-        {!isProjectCreated && showProjectForm && form}
+        {!isProjectCreated && showProjectForm && initialData}
         {isProjectCreated && (
           <ItemForm onAddItem={addItemHandler} loading={httpState.loading} />
         )}
