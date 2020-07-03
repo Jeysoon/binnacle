@@ -2,6 +2,7 @@ import React, { useContext, Suspense } from "react";
 import { AuthContext } from "./context/auth-context";
 import { Route, Switch, Redirect, withRouter } from "react-router-dom";
 import Layout from "./hoc/Layout/Layout";
+import Projects from "./containers/Projects/Projects";
 
 const Auth = React.lazy(() => {
   return import("./containers/Auth/Auth");
@@ -28,6 +29,7 @@ function App() {
     routes = (
       <Switch>
         <Route path="/project-manager" component={ProjectManager} />
+        <Route path="/projects" component={Projects} />
         <Route path="/" exact component={Welcome} />
         <Redirect to="/" />
       </Switch>

@@ -7,6 +7,7 @@ import Input from "../../components/UI/Input/Input";
 // import LoadingIndicator from "../../components/UI/LoadingIndicator/LoadingIndicator";
 import ItemForm from "./ItemForm/ItemForm";
 import { updateObject, checkValidity } from "../../shared/utility";
+import { Redirect } from "react-router";
 
 // const itemReducer = (currenItems, action) => {
 //   switch (action.type) {
@@ -27,6 +28,8 @@ const httpReducer = (curHttpState, action) => {
       return { loading: true, error: null };
     case "RESPONSE":
       return { ...curHttpState, loading: false };
+    case "ITEM_ADDED": 
+      return {...curHttpState, itemAdded: true}
     case "ERROR":
       return { loading: false, error: action.errorMessage };
     case "CLEAR":
@@ -43,6 +46,7 @@ const ProjectManager = props => {
 
   // const [ projectData, setProjectData ] = useState('');
   const [httpState, dispatchHttp] = useReducer(httpReducer, {
+    itemAdded: false,
     loading: false,
     error: null
   });
@@ -178,6 +182,7 @@ const ProjectManager = props => {
       })
         .then(response => {
           dispatchHttp({ type: "RESPONSE" });
+          dispatchHttp({type:"ITEM_ADDED"})
           console.log("Response: ", response);
           return response.json();
         })
@@ -187,6 +192,12 @@ const ProjectManager = props => {
     },
     [projectName]
   );
+
+  let redirect = null;
+
+  if (httpState.itemAdded) {
+    redirect = <Redirect to="/projects" />;
+  }
 
   return (
     <div className={classes.ProjectCreator}>
@@ -214,6 +225,7 @@ const ProjectManager = props => {
           <ItemForm onAddItem={addItemHandler} loading={httpState.loading} />
         )}
       </div>
+      {redirect}
     </div>
   );
 };

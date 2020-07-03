@@ -97,8 +97,7 @@ const Auth = () => {
       .post(url, formData)
       .then(response => {
         dispatchHttp({ type: "RESPONSE" });
-        //dispatchHttp({token: response.data.idToken});
-        httpState.token = response.data.idToken;
+        dispatchHttp({ token: response.data.idToken });
         return response.json();
       })
       .catch(err => {});
