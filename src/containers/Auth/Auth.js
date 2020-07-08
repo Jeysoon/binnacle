@@ -1,4 +1,9 @@
-import React, { useState, useContext, useReducer, useEffect } from "react";
+import React, {
+  useState,
+  useContext,
+  useReducer,
+  useEffect,
+} from "react";
 import Button from "../../components/UI/Button/Button";
 import Input from "../../components/UI/Input/Input";
 import Spinner from "../../components/UI/Spinner/Spinner";
@@ -74,6 +79,10 @@ const Auth = () => {
   useEffect(() => {
     if (httpState.token) {
       authContext.login();
+      return ()=>{
+        //Clean up function.
+        
+      }
     }
   }, [httpState.token, authContext]);
 
@@ -81,7 +90,7 @@ const Auth = () => {
     const formData = {
       email: authForm.email.value,
       password: authForm.password.value,
-      returnSecuretoken: true
+      returnSecureToken: true
     };
     let url = null;
     url =
@@ -96,6 +105,10 @@ const Auth = () => {
     axios
       .post(url, formData)
       .then(response => {
+        const expirationDate = new Date(new Date().getTime() + response.data.expiresIn * 1000);
+        localStorage.setItem("token", response.data.idToken);
+        localStorage.setItem("expirationDate", expirationDate);
+        localStorage.setItem("userId", response.data.localId);
         dispatchHttp({ type: "RESPONSE" });
         dispatchHttp({ token: response.data.idToken });
         return response.json();
@@ -154,6 +167,56 @@ const Auth = () => {
   const signUpClicked = () => {
     setSignMethod(false);
   };
+
+  // const logout = () => {
+  //   localStorage.removeItem("token");
+  //   localStorage.removeItem("expirationDate");
+  //   localStorage.removeItem("userId");
+  //   return {
+  //     type: "AUTH_LOGOUT"
+  //   };
+  // };
+
+  // const checkAuthTimeout = expirationTime => {
+  //     setTimeout(() => {
+  //       logout();
+  //     }, expirationTime * 1000);
+  
+  // };
+
+  // const authSuccess = (token, userId) => {
+  //   return {
+  //     type: "AUTH_SUCCESS",
+  //     idToken: token,
+  //     userId: userId
+  //   };
+  // };
+
+  // const authCheckState = () => {
+  //   return dispatch => {
+  //     const token = localStorage.getItem("token");
+  //     if (!token) {
+  //       dispatch(logout());
+  //     } else {
+  //       const expirationDate = new Date(localStorage.getItem("expirationDate"));
+  //       if (expirationDate <= new Date()) {
+  //         dispatch(logout());
+  //       } else {
+  //         const userId = localStorage.getItem("userId");
+  //         dispatch(authSuccess(token, userId));
+  //         dispatch(
+  //           checkAuthTimeout(
+  //             (expirationDate.getTime() - new Date().getTime()) / 1000
+  //           )
+  //         );
+  //       }
+  //     }
+  //   };
+  // };
+
+  // useEffect(() => {
+  //   authCheckState();
+  // },[authChec]);
 
   return (
     <>

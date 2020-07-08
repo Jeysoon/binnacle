@@ -28,8 +28,8 @@ const httpReducer = (curHttpState, action) => {
       return { loading: true, error: null };
     case "RESPONSE":
       return { ...curHttpState, loading: false };
-    case "ITEM_ADDED": 
-      return {...curHttpState, itemAdded: true}
+    case "ITEM_ADDED":
+      return { ...curHttpState, itemAdded: true };
     case "ERROR":
       return { loading: false, error: action.errorMessage };
     case "CLEAR":
@@ -182,7 +182,7 @@ const ProjectManager = props => {
       })
         .then(response => {
           dispatchHttp({ type: "RESPONSE" });
-          dispatchHttp({type:"ITEM_ADDED"})
+          dispatchHttp({ type: "ITEM_ADDED" });
           console.log("Response: ", response);
           return response.json();
         })
