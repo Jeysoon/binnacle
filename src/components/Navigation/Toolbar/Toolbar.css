@@ -4,8 +4,10 @@
     position: fixed;
     top: 0;
     left: 0;
-    background-color: #585858 ;
     display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #585858;
     padding: 0 20px;
     box-sizing: border-box;
     z-index: 90;
@@ -18,16 +20,16 @@
 .Logo {
     height: 80%;
 }
-.main__nav{
-    display: inline-block;
-    text-align: right;
+@media (max-width: 499px) {
+.DesktopOnly{
+    display: none;
+    /* text-align: right; */
     /* width: calc(100% - 74px); */
+    /* text-align: center;
     width: 95%;
     vertical-align: middle;
+    margin: 0;
+    padding: 0; */
 }
-
-
-.main__nav a{
-    margin: 8px;
 }
 

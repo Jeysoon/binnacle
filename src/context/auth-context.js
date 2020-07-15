@@ -31,40 +31,47 @@ const AuthContextProvider = props => {
   // };
 
   const checkAuthTimeout = expirationTime => {
-      setTimeout(() => {
-        logout();
-      }, expirationTime * 1000);
+    setTimeout(() => {
+      logout();
+    }, expirationTime * 1000);
   };
 
   const authCheckState = () => {
-      const token = localStorage.getItem("token");
-      if(token){setIsAuthenticated(true)};
-      if (!token) {
+    const token = localStorage.getItem("token");
+    if (token) {
+      setIsAuthenticated(true);
+    }
+    if (!token) {
+      logout();
+    } else {
+      const expirationDate = new Date(localStorage.getItem("expirationDate"));
+      if (expirationDate <= new Date()) {
         logout();
       } else {
-        const expirationDate = new Date(localStorage.getItem("expirationDate"));
-        if (expirationDate <= new Date()) {
-          logout();
-        } else {
-          // const userId = localStorage.getItem("userId");
-          //authSuccess(token, userId);
-          //setIsAuthenticated(true);
-          checkAuthTimeout((expirationDate.getTime() - new Date().getTime()) / 1000);
-        }
+        // const userId = localStorage.getItem("userId");
+        //authSuccess(token, userId);
+        //setIsAuthenticated(true);
+        checkAuthTimeout(
+          (expirationDate.getTime() - new Date().getTime()) / 1000
+        );
       }
+    }
   };
 
-  const checkAuthStateHandler = props =>{
-      authCheckState();
+  const checkAuthStateHandler = props => {
+    authCheckState();
   };
 
   return (
     <AuthContext.Provider
-      value={{ login: loginHandler, isAuth: isAuthenticated, checkAuthState: checkAuthStateHandler }}
+      value={{
+        login: loginHandler,
+        isAuth: isAuthenticated,
+        checkAuthState: checkAuthStateHandler
+      }}
     >
       {props.children}
     </AuthContext.Provider>
   );
-
-  };
+};
 export default AuthContextProvider;

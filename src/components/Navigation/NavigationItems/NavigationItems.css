@@ -2,12 +2,15 @@
     margin: 0;
     padding: 0;
     list-style: none;
-    height: 100%;
-}
-.NavigationItems li {
-    height: 100%;
-    width: 100%;
-}
+    height: 80%;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    }
+ 
+ /* .NavigationItems li:hover{
+     background-color: #19dd64;
+}  */
 
 @media (min-width: 500px) {
     .NavigationItems {

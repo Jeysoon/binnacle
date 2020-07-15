@@ -1,9 +1,4 @@
-import React, {
-  useState,
-  useContext,
-  useReducer,
-  useEffect,
-} from "react";
+import React, { useState, useContext, useReducer, useEffect } from "react";
 import Button from "../../components/UI/Button/Button";
 import Input from "../../components/UI/Input/Input";
 import Spinner from "../../components/UI/Spinner/Spinner";
@@ -79,10 +74,9 @@ const Auth = () => {
   useEffect(() => {
     if (httpState.token) {
       authContext.login();
-      return ()=>{
+      return () => {
         //Clean up function.
-        
-      }
+      };
     }
   }, [httpState.token, authContext]);
 
@@ -105,7 +99,9 @@ const Auth = () => {
     axios
       .post(url, formData)
       .then(response => {
-        const expirationDate = new Date(new Date().getTime() + response.data.expiresIn * 1000);
+        const expirationDate = new Date(
+          new Date().getTime() + response.data.expiresIn * 1000
+        );
         localStorage.setItem("token", response.data.idToken);
         localStorage.setItem("expirationDate", expirationDate);
         localStorage.setItem("userId", response.data.localId);
@@ -181,7 +177,7 @@ const Auth = () => {
   //     setTimeout(() => {
   //       logout();
   //     }, expirationTime * 1000);
-  
+
   // };
 
   // const authSuccess = (token, userId) => {
